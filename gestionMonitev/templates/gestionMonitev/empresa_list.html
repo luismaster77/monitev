@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block section %}
+ <h2>Empresa</h2> 
+ <hr>
+{% endblock section %}
+{% block maincontent %}
+<p>
+	<a href="#" class="btn btn-success btn-lg">
+		<span class="glyphicon glyphicon-search"></span> Buscar empresa
+	</a>
+</p> 
+<hr>
+<form action="." method="GET">
+ 	<div class="row well" id="id_empresa" name="id_empresa">
+ 		{% for p in object_list.all %}
+ 		<div class="col-md-4 well">
+ 		<div class="panel panel-primary">
+ 		<div class="panel-heading">
+		 <h3 class="panel-title">{{ p.empresa }}</h3>
+	 </div>
+ <div class="panel-body" name="id_empresa" id="id_empresa">
+	 <a href="{% url 'empresa-detail' p.id %}" id="id_empresa" name="id_empresa"></a>
+	 <strong><p>NIT:</strong> {{ p.nit }}</p>	
+	 <strong><p>Representante 1:</strong> {{ p.representante1 }}</p>
+	 <strong><p>Dirección 1:</strong> {{ p.direccion1 }}</p>
+	 <strong><p>Contacto:</strong> {{ p.telefono }}</p>
+	 </div>
+</form>
+ <div class="panel-footer">
+	{% if p.comment %}
+	{{ p.comment }}
+	{% else %}
+		<a class="btn btn-success" href="{% url 'empresa-update' p.id %}">Editar</a>
+		<a class="btn btn-warning" href="{% url 'empresa-delete' p.id %}">Eliminar</a>
+	{% endif %}
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+	</div>
+{% endblock maincontent %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% block section %}
+ <h2>
+ {{ object.medidor }}
+ {% if object.favorite %}
+    &#9733;
+ {% else %}
+    &#9734;
+ {% endif %}
+ {% if object.id %}
+ (<a href="{% url 'medidor-detail' object.id %}">{{ object.medidor }}</a>)
+ {% endif %}
+ </h2>
+ {% if perms.usuario.usuario %}
+ <a class="btn btn-warning" href="{% url 'medidor-update' object.id %}">Editar</a>
+ <a class="btn btn-danger" href="{% url 'medidor-delete' object.id %}">Eliminar</a>
+ {% endif %}
+ {% if user.is_authenticated %} 
+{% else %}
+ <p>Tú no tienes permisos para reservar esta pelicula</p>
+{% endif %}
+{% endblock section %}
+
+<p><strong>commentarios: </strong>{{ object.comment|default:"Sin commentarios" }}</p>
+{% endblock content %} 

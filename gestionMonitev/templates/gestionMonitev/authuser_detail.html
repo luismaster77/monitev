@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% block section %}
+ <h2>
+ {{ object.username }}
+ {% if object.favorite %}
+    &#9733;
+ {% else %}
+    &#9734;
+ {% endif %}
+ {% if object.id %}
+ (<a href="{% url 'user-detail' object.id %}">{{ object.username }}</a>)
+ {% endif %}
+ </h2>
+ {% if perms.usuario.usuario %}
+ <a class="btn btn-warning" href="{% url 'user-update' object.id %}">Editar</a>
+ <a class="btn btn-danger" href="{% url 'user-delete' object.id %}">Eliminar</a>
+ {% endif %}
+ {% if user.is_authenticated %} 
+{% else %}
+ <p>Tú no tienes permisos para reservar esta pelicula</p>
+{% endif %}
+{% endblock section %}
+
+<p><strong>commentarios: </strong>{{ object.comment|default:"Sin commentarios" }}</p>
+{% endblock content %} 

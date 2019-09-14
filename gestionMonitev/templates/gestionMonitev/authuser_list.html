@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block section %}
+ <h2>Usuarios</h2> 
+ <hr>
+{% endblock section %}
+{% block maincontent %}
+<p>
+	<a href="#" class="btn btn-success btn-lg">
+		<span class="glyphicon glyphicon-search"></span> Buscar Usuario
+	</a>
+</p> 
+<hr>
+<form action="." method="GET">
+ 	<div class="row well" id="id_user" name="id_user">
+ 		{% for p in object_list.all %}
+ 		<div class="col-md-4 well">
+ 		<div class="panel panel-primary">
+ 		<div class="panel-heading">
+		 <h3 class="panel-title">Nombre de usuario: {{ p.username}}</h3>
+	 </div>
+ <div class="panel-body" name="id_user" id="id_user">
+	 <a href="{% url 'user-detail' p.id %}" id="id_user" name="id_user"></a>
+	 <strong><p>Nombres:</strong> {{ p.first_name }}</p>	
+	 <strong><p>Apellidos:</strong> {{ p.last_name }}</p>
+	 <strong><p>Email:</strong> {{ p.emali }}</p>
+	 </div>
+</form>
+ <div class="panel-footer">
+	{% if p.comment %}
+	{{ p.comment }}
+	{% else %}
+		<a class="btn btn-success" href="{% url 'user-update' p.id %}">Editar</a>
+		<a class="btn btn-warning" href="{% url 'user-delete' p.id %}">Eliminar</a>
+	{% endif %}
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+	</div>
+{% endblock maincontent %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block section %}
+ <h2>Pasarela</h2> 
+ <hr>
+{% endblock section %}
+{% block maincontent %}
+<p>
+	<a href="#" class="btn btn-success btn-lg">
+		<span class="glyphicon glyphicon-search"></span> Buscar Pasarela
+	</a>
+</p> 
+<hr>
+<form action="." method="GET">
+ 	<div class="row well" id="id_pasarela" name="id_pasarela">
+ 		{% for p in object_list.all %}
+ 		<div class="col-md-4 well">
+ 		<div class="panel panel-primary">
+ 		<div class="panel-heading">
+		 <h3 class="panel-title">IP: {{ p.ip_pasarela }}</h3>
+	 </div>
+ <div class="panel-body" name="id_pasarela" id="id_pasarela">
+	 <a href="{% url 'pasarela-detail' p.id %}" id="id_pasarela" name="id_pasarela"></a>
+	 <strong><p>Empresa:</strong> {{ p.id_empresa }}</p>	
+	 <strong><p>ubicacion:</strong> {{ p.ubicacion }}</p>
+	 <strong><p>Marca:</strong> {{ p.marca }}</p>
+	 <strong><p>Fecha opareación:</strong> {{ p.fecha_entrada_operacion }}</p>
+	 </div>
+</form>
+ <div class="panel-footer">
+	{% if p.comment %}
+	{{ p.comment }}
+	{% else %}
+		<a class="btn btn-success" href="{% url 'pasarela-update' p.id %}">Editar</a>
+		<a class="btn btn-warning" href="{% url 'pasarela-delete' p.id %}">Eliminar</a>
+	{% endif %}
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+	</div>
+{% endblock maincontent %}

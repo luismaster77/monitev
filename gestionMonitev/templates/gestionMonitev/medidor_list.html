@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block section %}
+ 
+{% endblock section %}
+{% block maincontent %}
+<p style="margin-left:80%">
+	<a href="#" class="btn btn-success btn-sm">
+		<span class="glyphicon glyphicon-search"></span> Buscar
+		<input type="text" id="Buscar" style="color: black" placeholder="nombre medidor"></input>
+	</a>
+</p> 
+<form action="." method="GET">
+	<h4>Lista de Medidores</h4> 
+ 	<div class="row well" id="id_medidor" name="id_medidor">
+ 		{% for p in object_list.all %}
+ 		<div class="col-md-4 well">
+ 		<div class="panel panel-primary">
+ 		<div class="panel-heading">
+		 <h3 class="panel-title">IP: {{ p.ip_medidor }}</h3>
+	 </div>
+ <div class="panel-body" name="id_medidor" id="id_medidor">
+	 <a href="{% url 'medidor-detail' p.id %}" id="id_medidor" name="id_medidor"></a>
+	 <strong><p>Pasarela:</strong> {{ p.id_pasarela }}</p>	
+	 <strong><p>Ubicación:</strong> {{ p.ubicacion }}</p>
+	 <strong><p>Marca:</strong> {{ p.marca }}</p>
+	 <strong><p>Fecha operación:</strong> {{ p.fecha_entrada_operacion }}</p>
+	 </div>
+</form>
+ <div class="panel-footer">
+	{% if p.comment %}
+	{{ p.comment }}
+	{% else %}
+		<a class="btn btn-success" href="{% url 'medidor-update' p.id %}">Editar</a>
+		<a class="btn btn-warning" href="{% url 'medidor-delete' p.id %}">Eliminar</a>
+	{% endif %}
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+	</div>
+{% endblock maincontent %}
