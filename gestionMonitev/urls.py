@@ -42,7 +42,7 @@ urlpatterns = [
     #Delete
     url(r'^medidor/(?P<pk>\d+)/delete/$', views.MedidorDelete.as_view(), name='medidor-delete'),
 
-    #ENRUTAMIENTO PARA USUARIOS 
+    #ENRUTAMIENTO PARA USUARIOS DEL  SISTEMA
     #List
     url(r'^user/$', views.UserListView.as_view(), name='user-list'),
     #Detail
