@@ -92,8 +92,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'monitev',
-        'USER': 'root',
-        'PASSWORD':'',
+        'USER': 'develop1',
+        'PASSWORD':'lu13edu4rd0',
         'HOST':'127.1.0.0',
         'POST':5432,
         'CHARSET':'UTF8',
