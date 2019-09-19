@@ -162,7 +162,7 @@ if not DEBUG:
     MEDIA_ROOT =  '/home/pi/monitev/static/media'
 
     STATICFILES_DIRS = (
-         '/home/pi/monitev/static/static',
+         '/home/pi/monitev/static',
     )
     TEMPLATE_DIRS = (
         '/home/pi/monitev/static/templates',
