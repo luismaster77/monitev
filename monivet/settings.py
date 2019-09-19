@@ -157,7 +157,7 @@ USE_TZ = True
 if not DEBUG:
     STATIC_URL = '/static/'
     MEDIA_URL = '/media/'
-    STATIC_ROOT = '/home/pi/monitev/monivet/static'
+    STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static", "static-only")
     MEDIA_ROOT =  '/home/pi/monitev/monivet/static/media'
 
     # STATICFILES_DIRS = (
