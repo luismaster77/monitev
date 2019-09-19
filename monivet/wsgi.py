@@ -14,7 +14,7 @@ sys.path.append('/home/pi/monitev/')
 #referencia (en python) desde el path anterior al fichero settings.py
 #Importante hacerlo asi, si hay varias instancias coriendo (en lugar de setdefault)
 os.environ['DJANGO_SETTINGS_MODULE'] = "monitev.settings"
-#os.environ.setdefault(“DJANGO_SETTINGS_MODULE”, “proyectodjango.settings”)
+#os.environ.setdefault("DJANGO_SETTINGS_MODULE", "proyectodjango.settings")
 
 #prevenimos UnicodeEncodeError
 os.environ.setdefault("LANG", "es_CO.UTF-8")
