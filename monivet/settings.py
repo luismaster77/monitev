@@ -161,9 +161,9 @@ if not DEBUG:
     #STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static", "static-only")
     MEDIA_ROOT =  '/home/pi/monitev/static/media'
 
-    STATICFILES_DIRS = (
-         '/home/pi/monitev/static',
-    )
+    # STATICFILES_DIRS = (
+    #      '/home/pi/monitev/static',
+    # )
     TEMPLATE_DIRS = (
         '/home/pi/monitev/static/templates',
     )
