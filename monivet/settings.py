@@ -154,19 +154,28 @@ USE_TZ = True
 #      os.path.join(BASE_DIR, 'static'),
 # )
 # STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
-if not DEBUG:
-    STATIC_URL = '/static/'
-    MEDIA_URL = '/media/'
-    STATIC_ROOT = '/home/pi/monitev/static/'
-    #STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static", "static-only")
-    MEDIA_ROOT =  '/home/pi/monitev/static/media'
+# if not DEBUG:
+#     STATIC_URL = '/static/'
+#     MEDIA_URL = '/media/'
+#     STATIC_ROOT = '/home/pi/monitev/static/'
+#     #STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static", "static-only")
+#     MEDIA_ROOT =  '/home/pi/monitev/static/media'
 
-    # STATICFILES_DIRS = (
-    #      '/home/pi/monitev/static',
-    # )
-    TEMPLATE_DIRS = (
-        '/home/pi/monitev/static/templates',
-    )
+#     # STATICFILES_DIRS = (
+#     #      '/home/pi/monitev/static',
+#     # )
+#     TEMPLATE_DIRS = (
+#         '/home/pi/monitev/static/templates',
+#     )
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates'),
+)
+STATICFILES_DIRS = (
+     os.path.join(BASE_DIR, 'static'),
+)
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
+
+STATIC_URL = '/static/'
 
 ACCOUNT_ACTIVATION_DAYS = 7
 
