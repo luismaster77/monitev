@@ -160,11 +160,17 @@ if not DEBUG:
     STATIC_ROOT = '/home/pi/monitev/monivet/static'
     MEDIA_ROOT =  '/home/pi/monitev/monivet/static/media'
 
+    # STATICFILES_DIRS = (
+    #     '/home/pi/monitev/monivet/static/static',
+    #     )
+    # TEMPLATE_DIRS = (
+    #     '/home/pi/monitev/monivet/static/templates',
+    # )
     STATICFILES_DIRS = (
-        '/home/pi/monitev/monivet/static/static',
-        )
+      os.path.join(BASE_DIR, 'static'),
+    )
     TEMPLATE_DIRS = (
-        '/home/pi/monitev/monivet/static/templates',
+     os.path.join(BASE_DIR, 'templates'),
     )
 ACCOUNT_ACTIVATION_DAYS = 7
 
