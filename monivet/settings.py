@@ -136,7 +136,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-STATIC_URL = '/static/'
+#STATIC_URL = '/static/'
     # MEDIA_URL = '/media/'
     # STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static", "static-only")
     # MEDIA_ROOT =  os.path.join(os.path.dirname(BASE_DIR), "static", "media")
@@ -147,13 +147,25 @@ STATIC_URL = '/static/'
     # TEMPLATE_DIRS = (
     #     os.path.join(os.path.dirname(BASE_DIR), "static", "templates"),
     # )
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'templates'),
-)
-STATICFILES_DIRS = (
-     os.path.join(BASE_DIR, 'static'),
-)
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
+# TEMPLATE_DIRS = (
+#     os.path.join(BASE_DIR, 'templates'),
+# )
+# STATICFILES_DIRS = (
+#      os.path.join(BASE_DIR, 'static'),
+# )
+# STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
+if not DEBUG:
+    STATIC_URL = '/static/'
+    MEDIA_URL = '/media/'
+    STATIC_ROOT = '/home/pi/monitev/monivet/static'
+    MEDIA_ROOT =  '/home/pi/monitev/monivet/static/media'
+
+    STATICFILES_DIRS = (
+        '/home/pi/monitev/monivet/static/static',
+        )
+    TEMPLATE_DIRS = (
+        '/home/pi/monitev/monivet/static/templates',
+    )
 ACCOUNT_ACTIVATION_DAYS = 7
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
