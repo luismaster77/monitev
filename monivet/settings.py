@@ -94,7 +94,7 @@ DATABASES = {
         'NAME': 'monitev',
         'USER': 'develop1',
         'PASSWORD':'lu13edu4rd0',
-        'HOST':'127.1.0.0',
+        'HOST':'201.184.185.77',
         'POST':5432,
         'CHARSET':'UTF8',
     }
@@ -157,7 +157,8 @@ USE_TZ = True
 if not DEBUG:
     STATIC_URL = '/static/'
     MEDIA_URL = '/media/'
-    STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static", "static-only")
+    STATIC_ROOT = "/home/pi/monitev/static/"
+    #STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static", "static-only")
     MEDIA_ROOT =  '/home/pi/monitev/monivet/static/media'
 
     # STATICFILES_DIRS = (
