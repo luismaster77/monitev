@@ -157,19 +157,17 @@ USE_TZ = True
 if not DEBUG:
     STATIC_URL = '/static/'
     MEDIA_URL = '/media/'
-    STATIC_ROOT = '/home/pi/monitev/static/'
+    STATIC_ROOT = '/home/pi/monitev/monitev/static/'
     #STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static", "static-only")
     MEDIA_ROOT =  '/home/pi/monitev/monivet/static/media'
 
-    # STATICFILES_DIRS = (
-    #     '/home/pi/monitev/monivet/static/static',
-    #     )
+    STATICFILES_DIRS = (
+         '/home/pi/monitev/monivet/static/static',
+    )
     TEMPLATE_DIRS = (
         '/home/pi/monitev/monivet/static/templates',
     )
-    # STATICFILES_DIRS = (
-    #   os.path.join(BASE_DIR, 'static'),
-    # )
+
 ACCOUNT_ACTIVATION_DAYS = 7
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
