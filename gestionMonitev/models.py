@@ -39,7 +39,7 @@ class Empresa(models.Model):
         managed = False
         db_table = 'empresa'
     def __unicode__(self):
-		return self.empresa
+        return self.empresa
         
     def get_absolute_url(self):
         return reverse('empresa-list')
@@ -62,7 +62,7 @@ class Pasarela(models.Model):
         db_table = 'pasarela'
 
     def __unicode__(self):
-		return self.marca
+        return "{0} -- Identificador:  {1}".format(self.marca, self.id)
     
     def get_absolute_url(self):
         return reverse('pasarela-list')
@@ -85,7 +85,7 @@ class Medidor(models.Model):
         db_table = 'medidor'
 
     def __unicode__(self):
-		return self.medidor
+        return self.medidor
     
     def get_absolute_url(self):
         return reverse('medidor-list')
@@ -117,7 +117,7 @@ class Usuario(models.Model):
         db_table = 'usuario'
 
     def __unicode__(self):
-		return self.usuario
+        return self.usuario
 
 
 class Variable(models.Model):
@@ -200,7 +200,7 @@ class AuthUser(models.Model):
         db_table = 'auth_user'
 
     def __unicode__(self):
-		return self.username
+        return self.username
     
     def get_absolute_url(self):
         return reverse('user-list')
@@ -248,13 +248,12 @@ class DjangoContentType(models.Model):
         managed = False
         db_table = 'django_content_type'
         unique_together = (('app_label', 'model'),)
-
-
-class DjangoMigrations(models.Model):
-    app = models.CharField(max_length=255)
-    name = models.CharField(max_length=255)
-    applied = models.DateTimeField()
-
+    
+    class DjangoMigrations(models.Model):
+        app = models.CharField(max_length=255)
+        name = models.CharField(max_length=255)
+        applied = models.DateTimeField()
+    
     class Meta:
         managed = False
         db_table = 'django_migrations'
