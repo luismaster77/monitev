@@ -21,8 +21,8 @@ os.environ.setdefault("LANG", "es_CO.UTF-8")
 os.environ.setdefault("LC_ALL", "es_CO.UTF-8")
 
 #activamos nuestro virtualenv
-activate_this = '/home/pi/monitev/env/bin/activate_this.py'
-execfile(activate_this, dict(__file__=activate_this))
+#activate_this = '/home/pi/monitev/env/bin/activate_this.py'
+#execfile(activate_this, dict(__file__=activate_this))
 
 #obtenemos la aplicacion
 #from django.core.wsgi import get_wsgi_application

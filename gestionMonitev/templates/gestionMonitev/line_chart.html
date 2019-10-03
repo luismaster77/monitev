@@ -1,0 +1,214 @@
+{% extends "base1.html" %}
+{% load static %}
+{% block content %}
+<div style="display:inline-flex;margin:10px">
+        <div style="margin: inherit">
+                <canvas id="LineChart" width="500%" height="420%"></canvas>
+        </div>
+        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+        <!-- <div style="margin: inherit">
+            <canvas id="genderChart" width="300%" height="320%"></canvas>
+        </div>
+        <div id="chartContainer" style="height: 300px; width: 100%;"></div> -->
+    </div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script>
+        $.ajax({
+            method:'GET',
+            url:'/graphic/',
+            success:function(data){
+                console.log(data);
+                new Chart(document.getElementById("LineChart"), {
+                    animationEnabled: true,
+	                exportEnabled: true,
+                    type: 'line',
+                    data: {
+                        labels: data.label_data,
+                        datasets: [
+                            {
+                                label: "PA",
+                                backgroundColor: "rgba(62, 149, 205, 0.5)",
+                                borderColor : "rgba(62, 149, 205, 1)",
+                                pointBackgroundColor: "rgba(62, 149, 205, 1)",
+                                data: data.pa,
+                            },
+                            {
+                                label: "PQ",
+                                backgroundColor: "rgba(255, 10, 77, 0.5)",
+                                borderColor : "rgba(255, 10, 77, 1)",
+                                pointBackgroundColor: "rgba(255, 10, 77, 1)",
+                                data: data.pq,
+                            },
+                        ]
+                    },
+                    options: {
+                        legend: {
+                            labels: {
+                                fontSize: 12
+                            }
+                        },
+                        title: {
+                            display : true,
+                            text : "Variables PA-PQ",
+                            fontSize : 22.0
+                         },
+                        scales: {
+                            yAxes: [{
+                                ticks:{
+                                    beginAtZero: true,
+                                    fontSize:15.0,
+                                },
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Porcentaje',
+                                    fontSize :20.0,
+                                }
+                            }],
+                            xAxes: [{
+                                ticks:{
+                                  fontSize: 15.0,
+                                },
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Tiempo',
+                                    fontSize : 20.0,
+                                }
+                            }]
+                          },
+                        responsive: false,
+                    }
+                });
+            },
+            error:function(data){
+                console.log('Error!');
+            }
+        });
+    </script>
+    <script>
+        $.ajax({
+            method:'GET',
+            url:'/graphic/',
+            success:function(data){
+            var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            zoomEnabled: true,
+            data1: data.pa,
+            title:{
+                text: "Try Zooming and Panning" 
+            },
+            axisY :{
+                includeZero:false
+            },
+        });
+        chart.render();
+
+        }
+    });
+    </script>
+
+<!-- <script>
+window.onload = function () {
+
+var dataPoints1 = [];
+var dataPoints2 = [];
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	zoomEnabled: true,
+	title: {
+		text: "Share Value of Two Companies"
+	},
+	axisX: {
+		title: "chart updates every 3 secs"
+	},
+	axisY:{
+		prefix: "$",
+		includeZero: false
+	}, 
+	toolTip: {
+		shared: true
+	},
+	legend: {
+		cursor:"pointer",
+		verticalAlign: "top",
+		fontSize: 22,
+		fontColor: "dimGrey",
+		itemclick : toggleDataSeries
+	},
+	data: [{ 
+		type: "line",
+		xValueType: "dateTime",
+		yValueFormatString: "$####.00",
+		xValueFormatString: "hh:mm:ss TT",
+		showInLegend: true,
+		name: "Company A",
+		dataPoints: dataPoints1
+		},
+		{				
+			type: "line",
+			xValueType: "dateTime",
+			yValueFormatString: "$####.00",
+			showInLegend: true,
+			name: "Company B" ,
+			dataPoints: dataPoints2
+	}]
+});
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+		e.dataSeries.visible = false;
+	}
+	else {
+		e.dataSeries.visible = true;
+	}
+	chart.render();
+}
+
+var updateInterval = 300;
+// initial value
+var yValue1 = 600; 
+var yValue2 = 605;
+
+var time = new Date;
+// starting at 9.30 am
+time.setHours(9);
+time.setMinutes(30);
+time.setSeconds(00);
+time.setMilliseconds(00);
+
+function updateChart(count) {
+	count = count || 1;
+	var deltaY1, deltaY2;
+	for (var i = 0; i < count; i++) {
+		time.setTime(time.getTime()+ updateInterval);
+		deltaY1 = .5 + Math.random() *(-.5-.5);
+		deltaY2 = .5 + Math.random() *(-.5-.5);
+
+	// adding random value and rounding it to two digits. 
+	yValue1 = Math.round((yValue1 + deltaY1)*100)/100;
+	yValue2 = Math.round((yValue2 + deltaY2)*100)/100;
+
+	// pushing the new values
+	dataPoints1.push({
+		x: time.getTime(),
+		y: yValue1
+	});
+	dataPoints2.push({
+		x: time.getTime(),
+		y: yValue2
+	});
+	}
+
+	// updating legend text with  updated with y Value 
+	chart.options.data[0].legendText = " Company A  $" + yValue1;
+	chart.options.data[1].legendText = " Company B  $" + yValue2; 
+	chart.render();
+}
+// generates first set of dataPoints 
+updateChart(100);	
+setInterval(function(){updateChart()}, updateInterval);
+}   
+</script> -->
+{% endblock %}

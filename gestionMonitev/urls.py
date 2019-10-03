@@ -53,4 +53,10 @@ urlpatterns = [
     url(r'^user/create/$', views.UserCreate.as_view(), name='user-create'),
     #Delete
     url(r'^user/(?P<pk>\d+)/delete/$', views.UserDelete.as_view(), name='user-delete'),
+    #Graphic
+    url(r'^graphic/$',views.empresas,name='empresas'),
+    #pruebas graficas estaticas
+    url(r'^graphic/$',views.get_data, name='grafica'),
+    #Prueba de graficas con datos reales
+    #url(r'^graphic/$',views.get_data_variable, name='prueba-grafica'),
 ]

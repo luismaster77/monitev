@@ -2,8 +2,9 @@
 from __future__ import unicode_literals
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from gestionMonitev.models import Empresa,Pasarela,Medidor,AuthUser
+from gestionMonitev.models import Empresa,Pasarela,Medidor,AuthUser,Variable
 import requests
+import json
 from django.db.models import Q
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
@@ -19,6 +20,12 @@ from django.contrib import messages
 from django.contrib.messages import constants
 from django.db.models import F
 from django.contrib.auth.views import LoginView
+#Gráficas
+from random import randint
+from django.views.generic import TemplateView
+from chartjs.views.lines import BaseLineChartView
+from django.http import JsonResponse
+
 
 # Create your views here.
 
@@ -41,6 +48,38 @@ class LoginRequiredMixin(object):
     def as_view(cls):
         return login_required(super(LoginRequiredMixin, cls).as_view())
 
+#PRUEBAS DE GRAFICAS -------------------------------
+def empresas(request):
+    empresas = Empresa.objects.all()
+    empresa = [obj.empresa for obj in empresas]
+    nit = [int(obj.nit) for obj in empresas]
+
+    context = {
+        'id': json.dumps(empresa),
+        'nit': json.dumps(nit),
+    }
+    return render(request, 'gestionMonitev/line_chart.html', context)
+
+def get_data(request):
+    variables = Variable.objects.all()
+    data = {
+    'pa':[obj.pa for obj in variables],
+    'pq': [obj.pq for obj in variables],
+    # 'pa':json.dumps(pa),
+    # 'pq':json.dumps(pq),
+    'label_data':['10','20','30','40','50','60','70','80','90','100'],
+    }
+    return JsonResponse(data)
+
+# def get_data_variable(request):
+#     variables = Variable.objects.all()
+#     data = {
+#     'pa':[obj.pa for obj in variables],
+#     'pq':[obj.pq for obj in variables],
+#     'label_data':['PA','PQ'],
+#     }
+#     return JsonResponse(data)
+# --------------------------------------------------------------------------------
 class EmpresaListView(LoginRequiredMixin, ListView):
     model = Empresa
 
@@ -61,6 +100,7 @@ class EmpresaDelete(DeleteView):
  login_required = True
  model = Empresa
  success_url = reverse_lazy('empresa-list')
+
 
 #PASARELA
 def pasarela_list(request):
@@ -145,3 +185,23 @@ class UserDelete(DeleteView):
  login_required = True
  model = AuthUser
  success_url = reverse_lazy('user-list')
+
+
+ #Gráficas chart.js
+# class LineChartJSONView(BaseLineChartView):
+#     def get_labels(self):
+#         """Return 7 labels for the x-axis."""
+#         return ["January", "February", "March", "April", "May", "June", "July"]
+
+#     def get_providers(self):
+#         """Return names of datasets."""
+#         return ["Central", "Eastside", "Westside"]
+
+#     def get_data(self):
+#         """Return 3 datasets to plot."""
+#         return [[75, 44, 92, 11, 44, 95, 35],
+#                 [41, 92, 18, 3, 73, 87, 92],
+#                 [87, 21, 94, 3, 90, 13, 65]]
+# line_chart = TemplateView.as_view(template_name='gestionMonitev/line_chart.html')
+# line_chart_json = LineChartJSONView.as_view()
+  

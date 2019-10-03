@@ -22,4 +22,6 @@ urlpatterns = [
     url('monitev/', include('gestionMonitev.urls')),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'', include('registration.backends.default.urls')),
+    #url(r'^graphics/$',views.get_data),
+    url(r'^graphic/$',views.get_data),
 ]

@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'django_adminlte_theme',
     'registration',
     'crispy_forms',
-    'gestionMonitev'
+    'gestionMonitev',
+    'chartjs',
 ]
 
 MIDDLEWARE = [
@@ -88,13 +89,25 @@ WSGI_APPLICATION = 'monivet.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'monitev',
+#         'USER': 'develop1',
+#         'PASSWORD':'lu13edu4rd0',
+#         'HOST':'201.184.185.77',
+#         'POST':5432,
+#         'CHARSET':'UTF8',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'monitev',
-        'USER': 'develop1',
-        'PASSWORD':'lu13edu4rd0',
-        'HOST':'201.184.185.77',
+        'USER': 'root',
+        'PASSWORD':'',
+        'HOST':'127.0.0.1',
         'POST':5432,
         'CHARSET':'UTF8',
     }
@@ -176,6 +189,7 @@ STATICFILES_DIRS = (
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
 
 STATIC_URL = '/static/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 ACCOUNT_ACTIVATION_DAYS = 7
 
