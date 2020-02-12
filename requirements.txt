@@ -1,6 +1,6 @@
 certifi==2019.6.16
 chardet==3.0.4
-Django==1.11.24
+Django==1.11.28
 django-adminlte2==0.4.1
 django-crispy-forms==1.7.2
 django-registration-redux==2.6
